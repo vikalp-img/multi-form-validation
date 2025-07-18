@@ -7,11 +7,13 @@ import { BrowserRouter } from 'react-router-dom'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <TabContextProvider>
+    
       <BrowserRouter>
+      <TabContextProvider>
       <App />
+      </TabContextProvider>
       </BrowserRouter>
-    </TabContextProvider>
+    
     
   </StrictMode>,
 )

@@ -3,6 +3,8 @@ import { useFormik } from 'formik'
 import * as Yup from 'yup';
 import TabContext from '../context/Tab';
 import { useNavigate } from 'react-router-dom';
+import { accessTokenApi, addUser } from '../utils/axios';
+import { useEffect } from 'react';
 
 
 const indianStates = [
@@ -15,11 +17,12 @@ const indianStates = [
   "Delhi", "Jammu and Kashmir", "Ladakh", "Lakshadweep", "Puducherry"
 ];
 
-
 const Card = ({labels,formikValues,tabs}) => {
 
+const {selectedTab,setSelectedTab,details,setDetails,authenticated,setAuthenticated,setLoading} = useContext(TabContext);
 
-const {selectedTab,setSelectedTab,details,setDetails,authenticated,setAuthenticated} = useContext(TabContext);
+
+
 
 const navigate = useNavigate();
 
@@ -86,9 +89,17 @@ const formik = useFormik({
      setSelectedTab('bankDetails');
    } else {
      setDetails(prev => ({...prev,bank: values}));
-     setAuthenticated(true);
+     
+     
      navigate('/details');
      console.log('Submitted', {...details, bank: values});
+     const data= {...details, bank: values};
+    const accessToken = addUser(data);
+    if(accessToken){
+      setAuthenticated(true);
+    }else{
+      setAuthenticated(false);
+    }
    }
         // selectedTab ==='basicDetails' ? setSelectedTab('addressDetails') && setDetails({['basic']:values}) : setSelectedTab('bankDetails') && setDetails(prev=>({...prev,['address']:values}));
         resetForm();
@@ -96,7 +107,7 @@ const formik = useFormik({
     
 })
 
-console.log(details,'Details');
+// console.log(details,'Details');
 
 
   return (

@@ -16,15 +16,15 @@ const Details = () => {
     <div className="space-y-4">
       <div className="flex justify-between items-center border-b pb-2">
         <span className="text-gray-600 font-medium">Name:</span>
-        <span className="text-gray-800">{details.basic.name}</span>
+        <span className="text-gray-800">{details?.basic?.name}</span>
       </div>
       <div className="flex justify-between items-center border-b pb-2">
         <span className="text-gray-600 font-medium">State:</span>
-        <span className="text-gray-800">{details.address.state}</span>
+        <span className="text-gray-800">{details?.address?.state}</span>
       </div>
       <div className="flex justify-between items-center">
         <span className="text-gray-600 font-medium">Account Number:</span>
-        <span className="text-gray-800">{details.bank.accountnumber}</span>
+        <span className="text-gray-800">{details?.bank?.accountnumber}</span>
       </div>
     </div>
   </div>
