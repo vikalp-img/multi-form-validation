@@ -9,13 +9,18 @@ const TabContextProvider = ({children}) => {
     const [details,setDetails] = useState({});
     const [authenticated,setAuthenticated] = useState(false);
     const [loading,setLoading] = useState(true);
+    const [detailsApi,setDetailsApi] = useState(null);
+    const [accessToken,setAccesToken] = useState(null);
+    
 
 
     useEffect(()=>{
     
     const fetchAccessToken = async()=>{
       const accessToken = await accessTokenApi();
-      console.log(accessToken,'accessTokenInUseEffect');
+      // console.log(accessToken,'accessTokenInUseEffect');
+      setAccesToken(accessToken?.data);
+      localStorage.setItem('accessToken', accessToken?.data);
       
       if(accessToken?.success){
         setAuthenticated(true)
@@ -31,7 +36,7 @@ const TabContextProvider = ({children}) => {
     },[])
 
   return (
-    <TabContext.Provider value={{selectedTab,setSelectedTab,details,setDetails,authenticated,setAuthenticated,loading,setLoading}}>
+    <TabContext.Provider value={{selectedTab,setSelectedTab,details,setDetails,authenticated,setAuthenticated,loading,setLoading,detailsApi,setDetailsApi,accessToken,setAccesToken}}>
         {children}
     </TabContext.Provider>
   )
