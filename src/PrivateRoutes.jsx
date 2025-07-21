@@ -10,7 +10,7 @@ const PrivateRoutes = ({children}) => {
     if(loading) return <div className='flex items-center justify-center h-screen  '><TbLoader3 className='animate-spin text-4xl' /></div>
 
     if (!authenticated) return (
-     <Navigate to='/' replace />
+     <Navigate to='/login' replace />
     )
          
     
